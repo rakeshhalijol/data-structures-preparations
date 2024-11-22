@@ -1,9 +1,11 @@
 name: Run Reminder Script
 
 on:
+  # Scheduled run every Friday at 7:10 PM UTC (12:40 AM IST on Saturday)
   schedule:
-    # Runs every Saturday at 9:00 AM UTC
     - cron: "10 19 * * 5"
+  # Manual trigger
+  workflow_dispatch:
 
 jobs:
   run-reminder:
