@@ -26,4 +26,7 @@ jobs:
 
       # Step 3: Run the script
       - name: Run reminder script
-        run: python reminder.py
+        env:
+          Email: ${{ secrets.EMAIL }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+        run: python reminder.py --email "$EMAIL" --password "$PASSWORD"
