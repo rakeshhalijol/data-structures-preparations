@@ -1,26 +1,30 @@
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-import json
+import argparse
 
-with open("credentials.json", "r") as file:
-    credentials = json.load(file)
-
+# Parse arguments
+parser = argparse.ArgumentParser(description="Send weekly reminder emails.")
+parser.add_argument("--email", required=True, help="Sender's email address")
+parser.add_argument("--password", required=True,
+                    help="Sender's email password")
+args = parser.parse_args()
 
 # Email configuration
 SMTP_SERVER = "smtp.gmail.com"  # SMTP server (Gmail in this case)
 SMTP_PORT = 587  # Port for TLS
-EMAIL_ADDRESS = "rakeshhalijol@gmail.com"  # Replace with your email
-# Replace with your app password or email password
-EMAIL_PASSWORD = credentials.get("password")
+EMAIL_ADDRESS = args.email  # Read from command-line argument
+EMAIL_PASSWORD = args.password  # Read from command-line argument
 
 # Recipients
-recipients = ["rakeshkhalijol05@gmail.com",
-              "rakshithalijol9686399215@gmail.com"]  # List of recipient emails
+recipients = [
+    "rakeshkhalijol05@gmail.com",
+    "rakshithalijol9686399215@gmail.com"
+]  # List of recipient emails
 
 # Email content
 subject = "Weekly Reminder on data structure"
-body = "Hi There!, hope your data structure prep is going well this is to keep remind that don't forgot your fang dream, All the best."
+body = "Hi There!, hope your data structure prep is going well. This is to remind you not to forget your FANG dream. All the best!"
 
 # Create a MIMEText message
 message = MIMEMultipart()
